@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="480dp"
+    tools:context=".ui.auth.OtpFragment">
+
+
+    <TextView
+
+        android:textColor="@color/otpTitle"
+        android:fontFamily="@font/nunito_sans_semibold"
+        android:id="@+id/please_input"
+        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Create Security PIN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:textAlignment="center"
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Create a PIN that’s contain 6 digits number for security purpose in Zwallet."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/please_input" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_login_edit"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        <EditText
+            android:background="@drawable/background_edit_text_otp"
+            android:layout_width="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent">
+
+        </EditText>
+        <EditText
+            android:background="@drawable/background_edit_text_otp"
+            android:layout_width="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent">
+
+        </EditText>
+        <EditText
+            android:background="@drawable/background_edit_text_otp"
+            android:layout_width="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent">
+
+        </EditText>
+        <EditText
+            android:background="@drawable/background_edit_text_otp"
+            android:layout_width="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent">
+
+        </EditText>
+        <EditText
+            android:background="@drawable/background_edit_text_otp"
+            android:layout_width="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent">
+
+        </EditText>
+        <EditText
+            android:background="@drawable/background_edit_text_otp"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+        </EditText>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:textAllCaps="false"
+
+        android:background="@drawable/background_button_confirn"
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:textSize="18dp"
+        android:textColor="@color/textConfirm"
+        android:fontFamily="@font/nunito_sans_semibold"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

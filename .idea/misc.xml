@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.144" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_button_confirn.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_button_profile.xml" value="0.231" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_button_transaction.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_edit_text_otp.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_edit_text_otp_after.xml" value="0.144" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_header_transaction.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_item_transaction.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_item_transaction_home.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_login_edit.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_success.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/button_transaksi.xml" value="0.1185" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/item_foto.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/zwaller.xml" value="0.144" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_auth.xml" value="0.5048409405255878" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_hello.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_launch.xml" value="0.18" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_otp.xml" value="0.33" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_profile.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_subscription.xml" value="0.2" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_subscriptionxml.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_home2.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_otp.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_personal_information.xml" value="0.22" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_pin.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_pin_success.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_profile.xml" value="0.18" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_register_2.xml" value="0.22" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_reset_password.xml" value="0.22" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_reset_password_email.xml" value="0.18" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_top_up.xml" value="0.24196018376722817" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/item_transaction_home.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.144" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

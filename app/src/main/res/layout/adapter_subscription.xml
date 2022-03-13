@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@drawable/background_item_transaction_home"
+    android:orientation="horizontal">
+
+    <com.google.android.material.imageview.ShapeableImageView
+
+        android:id="@+id/transactionImage"
+        style="@style/Style.App.circleImageView"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:background="@drawable/background_item_transaction_home"
+        android:src="@drawable/img">
+
+    </com.google.android.material.imageview.ShapeableImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/transactionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:text="Netflix"
+            android:textColor="@color/black">
+
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/transactionType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:text="Transfer">
+
+        </TextView>
+
+    </LinearLayout>
+
+
+    <TextView
+
+        android:layout_marginEnd="10dp"
+        android:id="@+id/transactionNominal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Rp. 50.000"
+        android:textColor="@color/Success" />
+
+</LinearLayout>
+
+
