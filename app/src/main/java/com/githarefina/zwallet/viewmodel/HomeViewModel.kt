@@ -11,6 +11,7 @@ import com.githarefina.zwallet.data.model.Invoice
 import com.githarefina.zwallet.data.model.UserDetail
 import com.githarefina.zwallet.data.model.response.APIResponse
 import com.githarefina.zwallet.network.NetworkConfig
+import com.githarefina.zwallet.utils.Resource
 
 class HomeViewModel(app:Application): ViewModel() {
     private val invoices= MutableLiveData<APIResponse<List<Invoice>>>()
@@ -19,10 +20,10 @@ class HomeViewModel(app:Application): ViewModel() {
     private var apiClient: ZwalletAPI = NetworkConfig(app).buildAPI()
 
     private var dataSource =ZwalletDataSource(apiClient)
-    fun getInvoice(): LiveData<APIResponse<List<Invoice>>> {
+    fun getInvoice(): LiveData<Resource<APIResponse<List<Invoice>>?>> {
         return dataSource.getInvoice()
     }
-    fun getBalance():LiveData<APIResponse<List<Balance>>>{
+    fun getBalance(): LiveData<Resource<APIResponse<List<Balance>>?>> {
         return dataSource.getBalance()
 
     }

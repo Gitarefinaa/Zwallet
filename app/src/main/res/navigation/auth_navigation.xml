@@ -74,7 +74,11 @@
         android:id="@+id/PinFragment"
         android:name="com.githarefina.zwallet.ui.auth.OtpFragment"
         android:label="fragment_pin"
-        tools:layout="@layout/fragment_pin" />
+        tools:layout="@layout/fragment_pin" >
+        <action
+            android:id="@+id/action_PinFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
 
 </navigation>

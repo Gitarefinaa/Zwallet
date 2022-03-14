@@ -10,28 +10,38 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.edit
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.data.model.request.SignUpRequest
 import com.githarefina.zwallet.data.model.response.ApIResponses
 import com.githarefina.zwallet.databinding.FragmentRegisterBinding
 import com.githarefina.zwallet.network.NetworkConfig
-import com.githarefina.zwallet.utils.KEY_SIGNUP_EMAIL
-import com.githarefina.zwallet.utils.PREFS_NAME
+import com.githarefina.zwallet.ui.viewModelFactory
+import com.githarefina.zwallet.utils.*
+import com.githarefina.zwallet.viewmodel.HomeViewModel
+import com.githarefina.zwallet.viewmodel.SignUpViewModel
+import com.githarefina.zwallet.widget.LoadingDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.net.ssl.HttpsURLConnection
+import kotlin.math.sign
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var pref :SharedPreferences
+    private lateinit var loadingDialog: LoadingDialog
+    private  val viewModel: SignUpViewModel by viewModelFactory { SignUpViewModel(requireActivity().application) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         pref = activity?.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)!!
+        loadingDialog= LoadingDialog(requireActivity())
+
         return binding.root
     }
 
@@ -39,51 +49,58 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         onClick()
     }
-       fun onClick(){
-           binding?.buttonSignUp
-           .setOnClickListener {
+    fun onClick(){
+        binding.forgot.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_registerFragment_to_resetPasswordEmail)
+
+        }
+        binding.buttonSignUp.setOnClickListener {
             signUp(it)
-           }
-       }
+        }
+    }
+
 
         fun signUp(view: View) {
             var dialog = ProgressDialog(activity)
             dialog.setMessage("Loading")
             dialog.setTitle("OTP")
-            var email= binding.editTextTextPersonName.text.toString()
             pref.edit {
                 putString(KEY_SIGNUP_EMAIL,binding.editTextTextPersonName.text.toString())
                 apply()
             }
-
-
             Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_otpFragment)
-            var request = SignUpRequest(email = binding.editTextTextPersonName.text.toString(), password = binding.editTextTextPassword.text.toString(), username = binding.user.text.toString())
-            NetworkConfig(requireContext()).buildAPI().signup(request).enqueue(object : Callback<ApIResponses>{
-                override fun onResponse(call: Call<ApIResponses>, response: Response<ApIResponses>) {
-                    if(response.body()?.status !=HttpsURLConnection.HTTP_OK){
-                        Toast.makeText(activity,response.body()?.message.toString()+email,Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(activity,response.body()?.message.toString()+email,Toast.LENGTH_LONG).show()
-                    }
-                }
-                override fun onFailure(call: Call<ApIResponses>, t: Throwable) {
-                    Toast.makeText(activity,t.localizedMessage,Toast.LENGTH_LONG).show()
-                }
-            })
-            binding.forgot.setOnClickListener {
-                Navigation.findNavController(it)
-                    .navigate(R.id.action_registerFragment_to_resetPasswordEmail)
-
-            }
-            binding.buttonSignUp.setOnClickListener {
-//                Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_homeActivity)
+            viewModel.signUp(binding.editTextTextPersonName.text.toString(),
+                binding.editTextTextPassword.text.toString(),binding.user.text.toString())
+                .observe(viewLifecycleOwner, Observer {
+                    when (it.state) {
+                        State.LOADING -> {
+                            loadingDialog.start("Processing your request")
+                        }
 
 
-            }
+                        State.SUCCESS -> {
+                            loadingDialog.stop()
+
+                            if (it.data?.status == HttpsURLConnection.HTTP_OK) {
+                                with(pref.edit()) {
+                                    putString(KEY_SIGNUP_EMAIL, binding.editTextTextPersonName.text.toString()
+                                    )
+                                }
+                            } else {
+                                Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+
+                        State.ERROR -> {
+                            loadingDialog.stop()
+                        } } })
+
+        }
 
 
 
 
-    }
+
 }

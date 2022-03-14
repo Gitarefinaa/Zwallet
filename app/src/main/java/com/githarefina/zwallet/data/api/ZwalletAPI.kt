@@ -20,7 +20,7 @@ interface ZwalletAPI {
     suspend fun login(@Body request: LoginRequest): APIResponse<UserModel>
 
     @POST("auth/signup")
-    fun signup(@Body request: SignUpRequest):Call<ApIResponses>
+    suspend fun signup(@Body request: SignUpRequest):APIResponse<String>
 
     @GET("user/myProfile")
     suspend  fun getProfile():APIResponse<UserDetail>
@@ -30,12 +30,14 @@ interface ZwalletAPI {
 
     @GET("auth/activate/{email}/{otp}")
     suspend fun activateOtp(@Path("email") email:String,@Path("otp")otp:String):APIResponse<String>
+    @GET(" /auth/checkPIN/{pin}")
+    suspend fun pinActivation(@Path("email") pin:String):APIResponse<String>
+
+
 
     @GET("home/getBalance")
     suspend fun getBalance():APIResponse<List<Balance>>
 
-
-
     @POST("auth/refresh-token")
-    fun refreshToken(@Body request: RefreshTokenRequest):Call<APIResponse<UserModel>>
+      fun refreshToken(@Body request: RefreshTokenRequest):Call<APIResponse<UserModel>>
 }
