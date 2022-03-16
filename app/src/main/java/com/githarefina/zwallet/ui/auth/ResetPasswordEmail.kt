@@ -9,8 +9,9 @@ import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentResetPasswordBinding
 import com.githarefina.zwallet.databinding.FragmentResetPasswordEmailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ResetPasswordEmail : Fragment() {
     private lateinit var binding: FragmentResetPasswordEmailBinding
     override fun onCreateView(

@@ -9,12 +9,13 @@ import com.githarefina.zwallet.data.model.UserDetail
 import com.githarefina.zwallet.data.model.response.APIResponse
 import com.githarefina.zwallet.network.NetworkConfig
 import com.githarefina.zwallet.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ProfilViewModel(app:Application): ViewModel() {
+@HiltViewModel
+class ProfilViewModel @Inject constructor(private var dataSource: ZwalletDataSource): ViewModel() {
 
-    private var apiClient: ZwalletAPI = NetworkConfig(app).buildAPI()
 
-    private var dataSource = ZwalletDataSource(apiClient)
     fun getProfile(): LiveData<Resource<APIResponse<UserDetail>?>> {
         return dataSource.getProfile()
     }

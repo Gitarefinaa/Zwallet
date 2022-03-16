@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.edit
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
@@ -22,17 +23,18 @@ import com.githarefina.zwallet.utils.*
 import com.githarefina.zwallet.viewmodel.HomeViewModel
 import com.githarefina.zwallet.viewmodel.SignUpViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.net.ssl.HttpsURLConnection
 import kotlin.math.sign
-
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var pref :SharedPreferences
     private lateinit var loadingDialog: LoadingDialog
-    private  val viewModel: SignUpViewModel by viewModelFactory { SignUpViewModel(requireActivity().application) }
+    private  val viewModel: SignUpViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +71,6 @@ class RegisterFragment : Fragment() {
                 putString(KEY_SIGNUP_EMAIL,binding.editTextTextPersonName.text.toString())
                 apply()
             }
-            Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_otpFragment)
             viewModel.signUp(binding.editTextTextPersonName.text.toString(),
                 binding.editTextTextPassword.text.toString(),binding.user.text.toString())
                 .observe(viewLifecycleOwner, Observer {
@@ -83,11 +84,19 @@ class RegisterFragment : Fragment() {
                             loadingDialog.stop()
 
                             if (it.data?.status == HttpsURLConnection.HTTP_OK) {
+                                loadingDialog.start("Processing your request")
+                                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_otpFragment)
+
                                 with(pref.edit()) {
                                     putString(KEY_SIGNUP_EMAIL, binding.editTextTextPersonName.text.toString()
                                     )
                                 }
-                            } else {
+                            }else if(it.data?.status == HttpsURLConnection.HTTP_OK){
+                                loadingDialog.start("Register gagal")
+
+
+                            }
+                            else {
                                 Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
                             }
                         }

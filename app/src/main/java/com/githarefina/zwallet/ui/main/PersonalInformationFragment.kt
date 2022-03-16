@@ -7,18 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentPersonalInformationBinding
 import com.githarefina.zwallet.ui.viewModelFactory
 import com.githarefina.zwallet.utils.PREFS_NAME
 import com.githarefina.zwallet.viewmodel.ProfilViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.coroutines.Continuation
-
+@AndroidEntryPoint
 class PersonalInformationFragment : Fragment() {
 
 private lateinit var binding : FragmentPersonalInformationBinding
-private  val viewModel: ProfilViewModel by viewModelFactory { ProfilViewModel(requireActivity().application) }
+private  val viewModel: ProfilViewModel by activityViewModels()
 private lateinit var  prefs :SharedPreferences
 
 

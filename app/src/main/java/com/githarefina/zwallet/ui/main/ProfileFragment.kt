@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
@@ -17,11 +18,13 @@ import com.githarefina.zwallet.ui.viewModelFactory
 import com.githarefina.zwallet.utils.KEY_USER_TOKEN
 import com.githarefina.zwallet.utils.PREFS_NAME
 import com.githarefina.zwallet.viewmodel.ProfilViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private lateinit var binding:FragmentProfileBinding
     private lateinit var prefs:SharedPreferences
-    private  val viewModel: ProfilViewModel by viewModelFactory { ProfilViewModel(requireActivity().application) }
+    private  val viewModel: ProfilViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

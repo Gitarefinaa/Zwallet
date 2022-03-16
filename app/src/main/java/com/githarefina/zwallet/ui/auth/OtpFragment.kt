@@ -10,7 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
@@ -21,15 +24,17 @@ import com.githarefina.zwallet.utils.PREFS_NAME
 import com.githarefina.zwallet.utils.State
 import com.githarefina.zwallet.viewmodel.OTPViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
+import javax.net.ssl.HttpsURLConnection
 
-
+@AndroidEntryPoint
 class OtpFragment : Fragment() {
     private lateinit var binding :FragmentOtpBinding
     var otp  = mutableListOf<EditText>()
     private  lateinit var pref:SharedPreferences
     private lateinit  var loadingDialog: LoadingDialog
 
-    private  val viewModel: OTPViewModel by viewModelFactory { OTPViewModel(requireActivity().application) }
+    private  val viewModel: OTPViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         loadingDialog =LoadingDialog(requireActivity())
 
@@ -104,13 +109,18 @@ class OtpFragment : Fragment() {
         viewModel.activateOTP(email!!,getOtp()).observe(viewLifecycleOwner, Observer {
             when(it.state){
                 State.ERROR->{
-                    loadingDialog.start("PIN Not Succesfully created")
+                    loadingDialog.start("OTP Not Succesfully created")
                     loadingDialog.stop()
 
                 }
                 State.SUCCESS->{
-                    loadingDialog.start("PIN Succesfully created")
-                    Navigation.findNavController(view).navigate(R.id.action_otpFragment_to_PinFragment)
+                    if(it.data?.status!! != HttpsURLConnection.HTTP_OK){
+                        loadingDialog.start("OTP Not Succesfully created")
+
+                    }else{
+                        loadingDialog.start("OTP Succesfully created")
+                    }
+                    Navigation.findNavController(view).navigate(R.id.action_otpFragment_to_loginFragment)
 
                 }
                 State.LOADING->{
@@ -131,3 +141,7 @@ class OtpFragment : Fragment() {
 
 
 }
+
+
+
+

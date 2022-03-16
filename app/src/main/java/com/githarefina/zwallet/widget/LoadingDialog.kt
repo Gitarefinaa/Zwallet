@@ -14,12 +14,13 @@ class LoadingDialog(activity:Activity) {
     init{
         val builder = AlertDialog.Builder(activity)
         binding = LoadingDialogBinding.inflate(activity.layoutInflater)
-        alertDialog=builder.create()
+        builder.setView(binding.root)
+        alertDialog = builder.create()
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     }
     fun start(title:String){
-        binding.desc.text=title
+        binding.dialogTitle.text=title
         alertDialog.show()
     }
     fun stop(){

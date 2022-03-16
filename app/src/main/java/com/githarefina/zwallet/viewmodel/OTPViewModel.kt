@@ -9,10 +9,11 @@ import com.githarefina.zwallet.data.model.response.APIResponse
 import com.githarefina.zwallet.data.model.response.ApIResponses
 import com.githarefina.zwallet.network.NetworkConfig
 import com.githarefina.zwallet.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class OTPViewModel(app:Application):ViewModel() {
-    private var apiClient: ZwalletAPI = NetworkConfig(app).buildAPI()
-    private var dataSource = ZwalletDataSource(apiClient)
+@HiltViewModel
+class OTPViewModel @Inject constructor(private var dataSource: ZwalletDataSource):ViewModel() {
 
 
     fun activateOTP(email:String,password:String): LiveData<Resource<APIResponse<String>?>> {

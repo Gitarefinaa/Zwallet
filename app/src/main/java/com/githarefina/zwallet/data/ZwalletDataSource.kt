@@ -10,14 +10,19 @@ import com.githarefina.zwallet.data.model.Invoice
 import com.githarefina.zwallet.data.model.UserDetail
 import com.githarefina.zwallet.data.model.request.LoginRequest
 import com.githarefina.zwallet.data.model.request.SignUpRequest
+import com.githarefina.zwallet.data.model.request.TransferRequest
 import com.githarefina.zwallet.data.model.response.APIResponse
 import com.githarefina.zwallet.data.model.response.ApIResponses
 import com.githarefina.zwallet.utils.Resource
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ZwalletDataSource(private val apiClient: ZwalletAPI) {
+@Singleton
+class ZwalletDataSource @Inject constructor(private val apiClient: ZwalletAPI) {
         fun login(email:String,Password:String)= liveData(Dispatchers.IO){
            emit(Resource.loading(null))
             try {
@@ -71,7 +76,18 @@ class ZwalletDataSource(private val apiClient: ZwalletAPI) {
         }
     }
 
-    fun setPin(pin:String)= liveData(Dispatchers.IO){
+    fun setPin(pin:JsonObject)= liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.checkPin(pin)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+    }
+
+
+    fun activatePin(pin:Int)= liveData(Dispatchers.IO){
         emit(Resource.loading(null))
         try {
             val response =apiClient.pinActivation(pin)
@@ -92,6 +108,27 @@ class ZwalletDataSource(private val apiClient: ZwalletAPI) {
             emit(Resource.error(null,e.localizedMessage))
         }
 
+    }
+
+
+    fun getContact()= liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.getContact()
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+
+    }
+    fun Transfer(transfer:TransferRequest,pin:String)= liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.transfer(transfer,pin)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
     }
 
 

@@ -1,39 +1,35 @@
 package com.githarefina.zwallet.ui.main
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.githarefina.zwallet.R
-import com.githarefina.zwallet.adapter.TransactionAdapter
+import com.githarefina.zwallet.ui.adapter.TransactionAdapter
 import com.githarefina.zwallet.databinding.FragmentHomeBinding
 import com.githarefina.zwallet.data.model.Invoice
-import com.githarefina.zwallet.ui.viewModelFactory
-import com.githarefina.zwallet.utils.Helper.formatPrice
-import com.githarefina.zwallet.utils.KEY_USER_TOKEN
-import com.githarefina.zwallet.utils.PREFS_NAME
 import com.githarefina.zwallet.utils.State
 import com.githarefina.zwallet.viewmodel.HomeViewModel
+import com.githarefina.zwallet.viewmodel.TransferViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
 import javax.net.ssl.HttpsURLConnection
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapterTransaction: TransactionAdapter
     private lateinit var loadingDialog: LoadingDialog
-    private val viewModel: HomeViewModel by viewModelFactory { HomeViewModel(requireActivity().application) }
+    private val viewModel: HomeViewModel by activityViewModels()
+
     var data = MutableLiveData<List<Invoice>>()
 
     override fun onCreateView(
@@ -41,15 +37,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         loadingDialog = LoadingDialog(requireActivity())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
         adapter()
+        TopUp()
         onClick()
 //        profile()
     }
@@ -57,8 +52,15 @@ class HomeFragment : Fragment() {
     fun onClick() {
         binding.imageUser.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+        binding.buttonTransfer.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_contactFragment)
 
-
+        }
+    }
+    fun TopUp(){
+        binding.buttonTopUp.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_topUpFragment)
         }
     }
 
@@ -72,9 +74,16 @@ class HomeFragment : Fragment() {
         }
         viewModel.getBalance().observe(viewLifecycleOwner, Observer {
             binding.nama.text = it.data?.data?.get(0)?.name.toString()
-            binding.balance.text= it.data?.data?.get(0)?.balance.toString()
+            binding.balance.text ="Rp "+it.data?.data?.get(0)?.balance.toString()
             binding.handphone.text = it.data?.data?.get(0)?.phone.toString()
+//            if(binding.balance.text.toString()!=null){
+//                binding.balance.formatPrice(it.data?.data?.get(0)?.balance.toString())
+//
+//            }else{
+//                binding.balance.text= it.data?.data?.get(0)?.balance.toString()
+//            }
         })
+
         viewModel.getInvoice().observe(viewLifecycleOwner, Observer {
             when (it.state) {
                 State.LOADING -> {

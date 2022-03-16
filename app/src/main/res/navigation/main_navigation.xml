@@ -14,6 +14,12 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_topUpFragment"
+            app:destination="@id/topUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -29,4 +35,62 @@
         android:name="com.githarefina.zwallet.ui.main.PersonalInformationFragment"
         android:label="fragment_personal_information"
         tools:layout="@layout/fragment_personal_information" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.githarefina.zwallet.ui.main.ContactFragment"
+        android:label="fragment_contact"
+        tools:layout="@layout/fragment_contact" >
+
+        <action
+            android:id="@+id/action_contactFragment_to_confirmationPinFragment"
+            app:destination="@id/confirmationPinFragment" />
+        <action
+            android:id="@+id/action_contactFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.githarefina.zwallet.ui.main.TransferFragment"
+        android:label="fragment_transfer"
+        tools:layout="@layout/fragment_transfer" >
+        <action
+            android:id="@+id/action_transferFragment_to_confirmationPinFragment"
+            app:destination="@id/confirmationPinFragment" />
+        <action
+            android:id="@+id/action_transferFragment_to_detailTransferFragment"
+            app:destination="@id/detailTransferFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTransferSuccess"
+        android:name="com.githarefina.zwallet.ui.main.FragmentTransferSuccess"
+        android:label="fragment_transfer_success"
+        tools:layout="@layout/fragment_transfer_success" >
+        <action
+            android:id="@+id/action_fragmentTransferSuccess_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_confirmation_pin"
+        android:id="@+id/confirmationPinFragment"
+        android:name="com.githarefina.zwallet.ui.main.ConfirmationPinFragment"
+        android:label="ConfirmationPinFragment" >
+        <action
+            android:id="@+id/action_confirmationPinFragment_to_fragmentTransferSuccess"
+            app:destination="@id/fragmentTransferSuccess" />
+    </fragment>
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="com.githarefina.zwallet.ui.main.TopUpFragment"
+        android:label="fragment_top_up"
+        tools:layout="@layout/fragment_top_up" />
+    <fragment
+        android:id="@+id/detailTransferFragment"
+        android:name="com.githarefina.zwallet.DetailTransferFragment"
+        tools:layout="@layout/fragment_detail_transfer"
+        android:label="DetailTransferFragment" >
+        <action
+            android:id="@+id/action_detailTransferFragment_to_confirmationPinFragment"
+            app:destination="@id/confirmationPinFragment" />
+    </fragment>
 </navigation>

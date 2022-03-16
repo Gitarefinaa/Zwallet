@@ -1,5 +1,7 @@
 package com.githarefina.zwallet.ui.auth
 
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -10,35 +12,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentPinBinding
+import com.githarefina.zwallet.ui.main.MainActivity
 import com.githarefina.zwallet.ui.viewModelFactory
+import com.githarefina.zwallet.utils.PREFS_NAME
 import com.githarefina.zwallet.utils.State
 import com.githarefina.zwallet.viewmodel.PinViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PinFragment : Fragment() {
-    private lateinit var binding :FragmentPinBinding
+    private lateinit var binding : FragmentPinBinding
     var pin  = mutableListOf<EditText>()
     private  lateinit var pref: SharedPreferences
     private lateinit  var loadingDialog:LoadingDialog
-    private  val viewModel: PinViewModel by viewModelFactory { PinViewModel(requireActivity().application) }
+    private  val viewModel: PinViewModel by activityViewModels()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        loadingDialog =LoadingDialog(requireActivity())
         binding = FragmentPinBinding.inflate(inflater,container,false)
+        loadingDialog= LoadingDialog(requireActivity())
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
         initEditText()
+        binding.confirm.setOnClickListener{
+            setpin(it)
+        }
     }
 
     fun initEditText(){
@@ -86,11 +97,7 @@ class PinFragment : Fragment() {
             })
 
         }
-        binding.confirm.setOnClickListener{
-            setpin(it)
 
-
-        }
 
     }
     fun getpin():String{
@@ -101,21 +108,20 @@ class PinFragment : Fragment() {
         binding.confirm.setBackgroundResource(R.drawable.background_header_transaction)
         var white= R.color.white
         binding.confirm.setTextColor(resources.getColor(white))
-        viewModel.pinActivation(getpin()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.pinActivation(getpin().toInt()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when(it.state){
                 State.ERROR->{
-                    loadingDialog.start("PIN Not Succesfully created")
-                    loadingDialog.stop()
+                    loadingDialog.start("PIN Not Correct")
 
                 }
                 State.SUCCESS->{
-                    loadingDialog.start("PIN Succesfully created")
-                    Navigation.findNavController(view).navigate(R.id.action_PinFragment_to_loginFragment)
+                    loadingDialog.start("PIN Correct")
+                    var intent = Intent(activity, MainActivity::class.java)
+                    activity?.startActivity(intent)
 
                 }
                 State.LOADING->{
                     loadingDialog.start("Your process being loaded")
-                    loadingDialog.stop()
 
                 }
             }

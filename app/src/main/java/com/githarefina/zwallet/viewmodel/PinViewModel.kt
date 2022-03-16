@@ -9,14 +9,15 @@ import com.githarefina.zwallet.data.model.response.APIResponse
 import com.githarefina.zwallet.data.model.response.ApIResponses
 import com.githarefina.zwallet.network.NetworkConfig
 import com.githarefina.zwallet.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PinViewModel(app:Application):ViewModel() {
-    private var apiClient: ZwalletAPI = NetworkConfig(app).buildAPI()
-    private var dataSource = ZwalletDataSource(apiClient)
+@HiltViewModel
+class PinViewModel @Inject constructor(private var dataSource: ZwalletDataSource):ViewModel() {
 
 
-    fun pinActivation(pin:String): LiveData<Resource<APIResponse<String>?>> {
-        return  dataSource.setPin(pin)
+    fun pinActivation(pin:Int): LiveData<Resource<APIResponse<String>?>> {
+        return  dataSource.activatePin(pin)
 
     }
 

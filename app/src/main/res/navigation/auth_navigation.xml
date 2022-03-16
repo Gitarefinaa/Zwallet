@@ -11,9 +11,10 @@
         android:name="com.githarefina.zwallet.ui.auth.OtpFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_otp">
+
         <action
-            android:id="@+id/action_otpFragment_to_PinFragment"
-            app:destination="@id/PinFragment" />
+            android:id="@+id/action_otpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
 
@@ -23,12 +24,19 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
 
-        <action android:id="@+id/loginActionRegister"
-            app:destination="@id/registerFragment" />
 
         <action
             android:id="@+id/action_loginFragment_to_resetPasswordEmail"
             app:destination="@id/resetPasswordEmail" />
+        <action
+            android:id="@+id/action_loginFragment_to_PinFragment"
+            app:destination="@id/PinFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_pinActivateFragment"
+            app:destination="@id/pinActivateFragment" />
 
     </fragment>
 
@@ -72,12 +80,28 @@
     </fragment>
     <fragment
         android:id="@+id/PinFragment"
-        android:name="com.githarefina.zwallet.ui.auth.OtpFragment"
+        android:name="com.githarefina.zwallet.ui.auth.PinFragment"
         android:label="fragment_pin"
         tools:layout="@layout/fragment_pin" >
+
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_pin_success"
+        android:id="@+id/pinSuccessFragment"
+        android:name="com.githarefina.zwallet.ui.main.PinSuccessFragment"
+        android:label="PinSuccessFragment" >
         <action
-            android:id="@+id/action_PinFragment_to_loginFragment"
+            android:id="@+id/action_pinSuccessFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_pin_activate"
+        android:id="@+id/pinActivateFragment"
+        android:name="com.githarefina.zwallet.ui.auth.PinActivateFragment"
+        android:label="PinActivateFragment" >
+        <action
+            android:id="@+id/action_pinActivateFragment_to_pinSuccessFragment"
+            app:destination="@id/pinSuccessFragment" />
     </fragment>
 
 

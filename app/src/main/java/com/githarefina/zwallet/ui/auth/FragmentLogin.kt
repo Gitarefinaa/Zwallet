@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentLoginBinding
@@ -18,10 +19,12 @@ import com.githarefina.zwallet.ui.viewModelFactory
 import com.githarefina.zwallet.utils.*
 import com.githarefina.zwallet.viewmodel.LoginViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
 import javax.net.ssl.HttpsURLConnection
+@AndroidEntryPoint
 class FragmentLogin : Fragment() {
-    private  val viewModel: LoginViewModel by viewModelFactory { LoginViewModel(requireActivity().application) }
-    private lateinit var binding:FragmentLoginBinding
+    private  val viewModel: LoginViewModel by activityViewModels()
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var prefs :SharedPreferences
     private lateinit var loadingDialog: LoadingDialog
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,13 +37,19 @@ class FragmentLogin : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val application : Application = context?.applicationContext as Application
         loginClick()
+        binding.forgot.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_resetPasswordEmail)
+        }
+        binding.textSignUp.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
     fun toMain(){
         val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
         activity?.finish()
     }
-    fun observeData() {
+    fun observeData(view: View) {
         if (binding.editTextTextPersonName.text.isNullOrEmpty() || binding.editTextTextPassword.text.isNullOrEmpty()) {
             Toast.makeText(activity, "email/password is empty", Toast.LENGTH_LONG).show()
         }
@@ -53,11 +62,14 @@ class FragmentLogin : Fragment() {
                 State.LOADING -> {
                     loadingDialog.start("Processing your request")
                 }
-
-
                 State.SUCCESS -> {
-                    loadingDialog.start("Processing your request")
                     loadingDialog.stop()
+
+                    if(it.data?.data?.hasPin!!.equals(false) ){
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_pinActivateFragment)
+                    }else if(it.data?.data?.hasPin!!.equals(true)){
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_PinFragment)
+                    }
 
                     if (it.data?.status == HttpsURLConnection.HTTP_OK) {
                         with(prefs.edit()) {
@@ -67,7 +79,6 @@ class FragmentLogin : Fragment() {
                             putString(KEY_USER_REFRESH_TOKEN, it.data?.data?.refreshToken)
                             apply()
                         }
-                        toMain()
                     } else {
 //                        Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
                     }
@@ -85,8 +96,7 @@ class FragmentLogin : Fragment() {
 
     fun loginClick(){
         binding.buttonLogin.setOnClickListener {
-            observeData()
-
+            observeData(it)
         }
 
     }

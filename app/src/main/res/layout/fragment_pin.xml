@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/nunito_sans_semibold"
-        android:text="Create Security PIN"
+        android:text="PIN Confirmation"
         android:textColor="@color/otpTitle"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,13 +23,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:fontFamily="@font/nunito_sans_semibold"
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
-        android:text="Create a PIN that’s contain 6 digits number for security purpose in Zwallet."
+        android:text="Check a PIN that’s contain 6 digits number for security purpose in Zwallet."
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
