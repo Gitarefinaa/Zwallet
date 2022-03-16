@@ -5,6 +5,7 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import com.githarefina.zwallet.data.api.ZwalletAPI
 import com.githarefina.zwallet.utils.BASE_URL
+import com.githarefina.zwallet.utils.KEY_USER_REFRESH_TOKEN
 import com.githarefina.zwallet.utils.KEY_USER_TOKEN
 import com.githarefina.zwallet.utils.PREFS_NAME
 import okhttp3.Authenticator
@@ -19,6 +20,7 @@ class NetworkConfig(val context: Context) {
 
     fun getInterceptor(authenticator: Authenticator?=null):OkHttpClient{
         val token =pref.getString(KEY_USER_TOKEN,"")
+        val refreshToken =pref.getString(KEY_USER_REFRESH_TOKEN,"")
         val interceptor : TokenInterceptor
         val logging = HttpLoggingInterceptor()
         val client = OkHttpClient.Builder()
@@ -29,6 +31,10 @@ class NetworkConfig(val context: Context) {
         }
         if(authenticator !=null){
            return client.addInterceptor(TokenInterceptor(token=token!!)).build()
+        }
+        if(token.isNullOrEmpty()){
+            interceptor = TokenInterceptor(token= refreshToken!!)
+            return client.addInterceptor(logging).addInterceptor(interceptor).build()
         }
         else{
             return client.addInterceptor(logging).build()

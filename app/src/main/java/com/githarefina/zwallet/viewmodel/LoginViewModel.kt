@@ -11,18 +11,16 @@ import com.githarefina.zwallet.data.api.model.UserModel
 import com.githarefina.zwallet.data.model.response.APIResponse
 import com.githarefina.zwallet.network.NetworkConfig
 import com.githarefina.zwallet.utils.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginViewModel(val app:Application):ViewModel() {
-    private var prefs: SharedPreferences = app?.getSharedPreferences(
-        PREFS_NAME,
-        Context.MODE_PRIVATE
-    )!!
-    private var apiClient: ZwalletAPI = NetworkConfig(app).buildAPI()
+@HiltViewModel
+class LoginViewModel @Inject constructor(private var dataSource: ZwalletDataSource):ViewModel() {
 
-    private var dataSource =ZwalletDataSource(apiClient)
 
-    fun login(email: String, password: String):LiveData<APIResponse<UserModel>> {
-        return dataSource.login(email, password)!!
+
+    fun login(email: String, password: String): LiveData<Resource<APIResponse<UserModel>?>> {
+        return dataSource.login(email, password)
     }
     //        val loginRequest = LoginRequest(email, password)
 //        val response = apiClient.login(loginRequest).execute()

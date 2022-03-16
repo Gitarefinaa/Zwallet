@@ -10,24 +10,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentOtpBinding
 import com.githarefina.zwallet.ui.viewModelFactory
 import com.githarefina.zwallet.utils.KEY_SIGNUP_EMAIL
 import com.githarefina.zwallet.utils.PREFS_NAME
+import com.githarefina.zwallet.utils.State
 import com.githarefina.zwallet.viewmodel.OTPViewModel
+import com.githarefina.zwallet.widget.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
+import javax.net.ssl.HttpsURLConnection
 
-
+@AndroidEntryPoint
 class OtpFragment : Fragment() {
     private lateinit var binding :FragmentOtpBinding
     var otp  = mutableListOf<EditText>()
     private  lateinit var pref:SharedPreferences
-    private  val viewModel: OTPViewModel by viewModelFactory { OTPViewModel(requireActivity().application) }
+    private lateinit  var loadingDialog: LoadingDialog
+
+    private  val viewModel: OTPViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        loadingDialog =LoadingDialog(requireActivity())
+
         binding = FragmentOtpBinding.inflate(inflater,container,false)
+
         pref = activity?.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)!!
         return binding.root
     }
@@ -72,14 +84,16 @@ class OtpFragment : Fragment() {
                     //this condition is to handel the delete input by users.
                     otp.get(i - 1).setText("") //Deletes the digit of OTP
                     otp.get(i - 1).requestFocus()
-                //and sets the focus on previous digit
+                    otp.get(i - 1).setBackgroundResource(R.drawable.background_edit_text_otp)
+
+                    //and sets the focus on previous digit
                 }
                 false
             })
 
         }
         binding.confirm.setOnClickListener{
-            setOtp()
+            setOtp(it)
         }
 
     }
@@ -87,13 +101,47 @@ class OtpFragment : Fragment() {
         return otp[0].text.toString()+otp[1].text.toString()+otp[2].text.toString()+otp[3].text.toString()+otp[4].text.toString()+otp[5].text.toString()
     }
 
-    fun setOtp(){
+    fun setOtp(view: View) {
         binding.confirm.setBackgroundResource(R.drawable.background_header_transaction)
+        var white= R.color.white
+        binding.confirm.setTextColor(resources.getColor(white))
         var email = pref.getString(KEY_SIGNUP_EMAIL,"")
         viewModel.activateOTP(email!!,getOtp()).observe(viewLifecycleOwner, Observer {
-            Toast.makeText(activity,it.message+getOtp(),Toast.LENGTH_LONG).show()
+            when(it.state){
+                State.ERROR->{
+                    loadingDialog.start("OTP Not Succesfully created")
+                    loadingDialog.stop()
+
+                }
+                State.SUCCESS->{
+                    if(it.data?.status!! != HttpsURLConnection.HTTP_OK){
+                        loadingDialog.start("OTP Not Succesfully created")
+
+                    }else{
+                        loadingDialog.start("OTP Succesfully created")
+                    }
+                    Navigation.findNavController(view).navigate(R.id.action_otpFragment_to_loginFragment)
+
+                }
+                State.LOADING->{
+                    loadingDialog.start("Your process being loaded")
+                    loadingDialog.stop()
+
+                }
+            }
+
+
         })
+    }
+    fun onClick(){
+        binding.confirm.setOnClickListener {
+
+        }
     }
 
 
 }
+
+
+
+

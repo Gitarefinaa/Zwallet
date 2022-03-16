@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentResetPasswordBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentResetPassword : Fragment() {
     // TODO: Rename and change types of parameters
    private lateinit var binding: FragmentResetPasswordBinding

@@ -18,10 +18,6 @@ data class UserDetail(
     @SerializedName("image")
     @Expose
     val image: String?,
-    @SerializedName("image")
-    @Expose
-    val balance: String?,
-
     @SerializedName("phone")
     @Expose
     val phone: String?

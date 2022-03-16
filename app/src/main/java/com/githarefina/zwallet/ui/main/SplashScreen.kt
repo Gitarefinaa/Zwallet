@@ -10,7 +10,9 @@ import android.os.Handler
 import com.githarefina.zwallet.ui.auth.AuthActivity
 import com.githarefina.zwallet.utils.KEY_LOGGED_IN
 import com.githarefina.zwallet.utils.PREFS_NAME
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashScreen : AppCompatActivity() {
     private lateinit var prefs :SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {

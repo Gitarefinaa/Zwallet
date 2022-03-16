@@ -29,7 +29,7 @@ data class Invoice(
     val phone: String?,
     @SerializedName("receiver")
     @Expose
-    val `receiver`: Int?,
+    val receiver: Int?,
     @SerializedName("sender")
     @Expose
     val sender: Int?,

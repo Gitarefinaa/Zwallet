@@ -14,6 +14,7 @@
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_item_transaction_home.xml" value="0.1" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_login_edit.xml" value="0.1" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_success.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/background_transfer.xml" value="0.231" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/button_transaksi.xml" value="0.1185" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/drawable/item_foto.xml" value="0.1" />
@@ -27,22 +28,32 @@
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_otp.xml" value="0.33" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_profile.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_contact.xml" value="0.5" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_subscription.xml" value="0.2" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_subscriptionxml.xml" value="0.22447916666666667" />
-        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_top_uo.xml" value="0.32123655913978494" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/adapter_top_up.xml" value="0.6802721088435374" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_confirmation_pin.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_contact.xml" value="0.5" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_detail_transfer.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_home.xml" value="0.31512605042016806" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_home2.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_otp.xml" value="0.25" />
-        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_personal_information.xml" value="0.22" />
-        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_pin.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_personal_information.xml" value="0.33" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_pin.xml" value="0.25" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_pin_activate.xml" value="0.315625" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_pin_success.xml" value="0.25" />
-        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_profile.xml" value="0.18" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_register_2.xml" value="0.22" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_reset_password.xml" value="0.22" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_reset_password_email.xml" value="0.18" />
-        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_top_up.xml" value="0.24196018376722817" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_top_up.xml" value="0.22" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_transfer.xml" value="0.33" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/fragment_transfer_success.xml" value="0.33" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/item_transaction_home.xml" value="0.1" />
+        <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/layout/loading_dialog.xml" value="0.5" />
         <entry key="..\:/Users/githa_refina/AndroidStudioProjects/Zwallet/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.144" />
       </map>
     </option>
