@@ -36,8 +36,8 @@ class DetailTransferFragment : Fragment() {
         binding.button4.setOnClickListener {
             loadingDialog.start("Your Process Being Loaded")
             AlertDialog.Builder(context)
-                .setTitle("Logout")
-                .setMessage("Are you sure want to transer")
+                .setTitle("Transfer")
+                .setMessage("Are you sure you want to transfer your money?")
                 .setPositiveButton("Yes") { _, _ ->
                     Navigation.findNavController(it).navigate(R.id.action_detailTransferFragment_to_confirmationPinFragment)
                     loadingDialog.stop()

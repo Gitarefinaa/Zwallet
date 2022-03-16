@@ -38,6 +38,10 @@ class FragmentTransferSuccess : Fragment() {
 
 
     fun data(){
+        viewModel.data_contact.observe(viewLifecycleOwner, Observer {
+            binding.textName.text = it.name
+            binding.textphoneNumber.text = it.phone
+        })
         viewModel.data_transfer.observe(viewLifecycleOwner, Observer {
         Toast.makeText(activity,it.createdAt.toString(),Toast.LENGTH_LONG).show()
         binding.amount.text=it?.amount.toString()

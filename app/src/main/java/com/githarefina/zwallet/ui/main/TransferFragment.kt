@@ -51,8 +51,8 @@ class TransferFragment : Fragment(){
             loadingDialog.start("Process being loaded")
             getBalance()
             AlertDialog.Builder(context)
-                .setTitle("Logout")
-                .setMessage("Are you sure want to transer")
+                .setTitle("Process your request")
+                .setMessage("Are you sure you want to continue ?")
                 .setPositiveButton("Yes") { _, _ ->
                     Navigation.findNavController(view).navigate(R.id.action_transferFragment_to_detailTransferFragment)
                     loadingDialog.stop()
