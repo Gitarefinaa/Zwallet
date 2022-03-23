@@ -1,44 +1,34 @@
 package com.githarefina.zwallet.network
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.util.Log
 import com.githarefina.zwallet.data.api.ZwalletAPI
-import com.githarefina.zwallet.utils.BASE_URL
-import com.githarefina.zwallet.utils.KEY_USER_REFRESH_TOKEN
-import com.githarefina.zwallet.utils.KEY_USER_TOKEN
-import com.githarefina.zwallet.utils.PREFS_NAME
+import com.githarefina.zwallet.utils.*
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-
-class NetworkConfig(val context: Context) {
-    val pref = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
-
+class NetworkConfig @Inject constructor(var pref: SharedPreferences) {
     fun getInterceptor(authenticator: Authenticator?=null):OkHttpClient{
-        val token =pref.getString(KEY_USER_TOKEN,"")
-        val refreshToken =pref.getString(KEY_USER_REFRESH_TOKEN,"")
-        val interceptor : TokenInterceptor
+        var token =pref.getString(KEY_USER_TOKEN,"")
+        Log.d("tokenCoba", token!!)
         val logging = HttpLoggingInterceptor()
-        val client = OkHttpClient.Builder()
         logging.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder().addInterceptor(logging)
         if(!token.isNullOrEmpty()) {
-            interceptor = TokenInterceptor(token= token!!)
-            return client.addInterceptor(logging).addInterceptor(interceptor).build()
+             client.addInterceptor(TokenInterceptor{ token })
         }
         if(authenticator !=null){
-           return client.addInterceptor(TokenInterceptor(token=token!!)).build()
+             client.authenticator(authenticator)
         }
-        if(token.isNullOrEmpty()){
-            interceptor = TokenInterceptor(token= refreshToken!!)
-            return client.addInterceptor(logging).addInterceptor(interceptor).build()
-        }
-        else{
-            return client.addInterceptor(logging).build()
-        }
+        return client.build()
+
     }
     private fun getService(): ZwalletAPI {
         val policy = ThreadPolicy.Builder().permitAll().build()
@@ -48,7 +38,8 @@ class NetworkConfig(val context: Context) {
             .addConverterFactory(GsonConverterFactory.create())
             .client(getInterceptor())
 
-            .build().create(ZwalletAPI::class.java)
+            .build()
+            .create(ZwalletAPI::class.java)
     }
 
 //    fun getRetrofit():ZwalletAPI{
@@ -59,7 +50,7 @@ class NetworkConfig(val context: Context) {
 //    }
 
     fun buildAPI():ZwalletAPI{
-        val authenticator= RefreshTokenInterceptor(context, getService(),pref )
+        val authenticator= RefreshTokenInterceptor( getService(),pref )
         return Retrofit.Builder().baseUrl(BASE_URL)
             .client(getInterceptor(authenticator))
             .addConverterFactory(GsonConverterFactory.create())

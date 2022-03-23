@@ -1,5 +1,6 @@
 package com.githarefina.zwallet.data.api
 
+import com.githarefina.zwallet.data.api.model.TransactionUser
 import com.githarefina.zwallet.data.api.model.UserModel
 import com.githarefina.zwallet.data.model.*
 import com.githarefina.zwallet.data.model.request.LoginRequest
@@ -25,19 +26,22 @@ interface ZwalletAPI {
     suspend  fun getProfile():APIResponse<UserDetail>
 
     @GET("home/getInvoice")
-     suspend fun getInvoice():APIResponse<List<Invoice>>
+    suspend fun getInvoice():APIResponse<List<Invoice>>
+
+    @GET("home/getAllInvoice")
+    suspend fun getAllInvoice():APIResponse<List<Invoice>>
 
     @GET("auth/activate/{email}/{otp}")
     suspend fun activateOtp(@Path("email") email:String,@Path("otp")otp:String):APIResponse<String>
 
-
     @GET("auth/checkPIN/{pin}")
     suspend fun pinActivation(@Path("pin") pin:Int):APIResponse<String>
 
+    @GET("tranfer/search")
+    suspend fun getSearchUser(@Query("name") name:String):APIResponse<ArrayList<ContactModel>>
+
     @PATCH("auth/PIN")
     suspend fun checkPin(@Body json:JsonObject):APIResponse<String>
-
-
 
     @GET("tranfer/contactUser")
     suspend fun getContact():APIResponse<ArrayList<ContactModel>>
@@ -48,6 +52,18 @@ interface ZwalletAPI {
     @GET("home/getBalance")
     suspend fun getBalance():APIResponse<List<Balance>>
 
+    @GET("tranfer/details/{id}")
+    suspend fun getTransactionName(@Path("id") id:Int):APIResponse<TransactionUser>
+
     @POST("auth/refresh-token")
-      fun refreshToken(@Body request: RefreshTokenRequest):Call<APIResponse<UserModel>>
+    fun refreshToken(@Body request: RefreshTokenRequest):Call<APIResponse<UserModel>>
+
+    @PATCH("user/changePassword")
+    suspend fun changePin(@Body pin: JsonObject): APIResponse<String>
+
+    @PATCH("user/changeInfo")
+    suspend fun changePhoneNumber(@Body phone: JsonObject): APIResponse<UserDetail>
+
+
+    //user/changeInfo
 }

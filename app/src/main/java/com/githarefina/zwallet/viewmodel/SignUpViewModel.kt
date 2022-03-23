@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.githarefina.zwallet.data.ZwalletDataSource
 import com.githarefina.zwallet.data.api.ZwalletAPI
@@ -15,10 +16,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private var dataSource: ZwalletDataSource):ViewModel() {
+    private lateinit var data_email:MutableLiveData<String>
 
-
-    fun signUp(email: String, password: String,username: String): LiveData<Resource<APIResponse<String>?>> {
-        return dataSource.signUp(email, password,username)
+    fun signUp(username: String,email: String, password: String): LiveData<Resource<APIResponse<String>?>> {
+        return dataSource.signUp(username,email, password)
     }
+
 
 }

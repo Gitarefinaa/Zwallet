@@ -51,8 +51,8 @@ class ProfileFragment : Fragment() {
             .setTitle("Logout")
             .setMessage("Are you sure want to log out")
             .setPositiveButton("Yes") { _, _ ->
-                with(prefs.getBoolean(KEY_USER_TOKEN, false)) {
-                    val intent = Intent(activity, com.githarefina.zwallet.ui.main.SplashScreen::class.java)
+                with(prefs.edit().putBoolean(KEY_USER_TOKEN, false)) {
+                    val intent = Intent(activity, SplashScreen::class.java)
                     startActivity(intent)
                     activity?.finish()
                 }
@@ -66,10 +66,23 @@ class ProfileFragment : Fragment() {
     fun getProfile(){
         viewModel.getProfile().observe(viewLifecycleOwner, Observer {
             binding.phoneNumber.text=it.data?.data?.phone
-            binding.textName.text =it.data?.data?.firstname
+            binding.textName.text =it.data?.data?.firstname +it.data?.data?.lastname
         })
+        binding.notification.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_personalInformationFragment)
+
+        }
 
         binding.personalInformation.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_personalInformationFragment)
+        }
+        binding.changePin.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_changePinFragment)
+        }
+        binding.changePassword.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_changePasswordFragment)
+        }
+        binding.phoneNumber.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_personalInformationFragment)
         }
 

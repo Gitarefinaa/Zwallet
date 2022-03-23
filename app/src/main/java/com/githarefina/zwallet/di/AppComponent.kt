@@ -1,10 +1,13 @@
 package com.githarefina.zwallet.di
 
-import android.content.ContentProviderClient
+import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import com.githarefina.zwallet.data.ZwalletDataSource
 import com.githarefina.zwallet.data.api.ZwalletAPI
 import com.githarefina.zwallet.network.NetworkConfig
+import com.githarefina.zwallet.utils.PREFS_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,10 +19,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppComponent {
     @Provides
+    fun provideContext(@ApplicationContext context: Context): Context =context
+
+
+   @Provides
+   @Singleton
+   fun getSharedPreferences(context: Context) = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
+
+    @Provides
     @Singleton
-    fun provideApi(@ApplicationContext context: Context):ZwalletAPI = NetworkConfig(context =context ).buildAPI()
-
-
+    fun provideApi(pref: SharedPreferences):ZwalletAPI = NetworkConfig(pref).buildAPI()
 
 
     @Provides

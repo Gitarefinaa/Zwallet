@@ -1,5 +1,6 @@
 package com.githarefina.zwallet.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,7 +29,9 @@ class PinSuccessFragment : Fragment() {
     }
     fun success(){
         binding.button.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_pinSuccessFragment_to_loginFragment)
+          var intent = Intent(activity,MainActivity::class.java)
+          startActivity(intent)
+          activity?.finish()
 
         }
     }

@@ -108,21 +108,20 @@ class PinFragment : Fragment() {
         binding.confirm.setBackgroundResource(R.drawable.background_header_transaction)
         var white= R.color.white
         binding.confirm.setTextColor(resources.getColor(white))
-        viewModel.pinActivation(getpin().toInt()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.checkPin(getpin().toInt()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when(it.state){
                 State.ERROR->{
-                    loadingDialog.start("PIN Not Correct")
+                    loadingDialog.start(it.message.toString())
 
                 }
                 State.SUCCESS->{
                     loadingDialog.start("PIN Correct")
                     var intent = Intent(activity, MainActivity::class.java)
                     activity?.startActivity(intent)
-
+                    loadingDialog.stop()
                 }
                 State.LOADING->{
                     loadingDialog.start("Your process being loaded")
-
                 }
             }
         })

@@ -1,5 +1,6 @@
 package com.githarefina.zwallet.data
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -21,19 +22,40 @@ import okhttp3.OkHttpClient
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class ZwalletDataSource @Inject constructor(private val apiClient: ZwalletAPI) {
-        fun login(email:String,Password:String)= liveData(Dispatchers.IO){
-           emit(Resource.loading(null))
+        fun login(email:String,Password:String)= liveData(Dispatchers.IO) {
+            emit(Resource.loading(null))
             try {
-                val loginRequest =LoginRequest(email=email, password = Password)
-                val response =apiClient.login(loginRequest)
+                val loginRequest = LoginRequest(email = email, password = Password)
+                val response = apiClient.login(loginRequest)
                 emit(Resource.success(response))
-            }catch (e :Exception){
-                emit(Resource.error(null,e.localizedMessage))
+            } catch (e: Exception) {
+                emit(Resource.error(null, e.localizedMessage))
             }
         }
 
+    fun getUserbyName(name:String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try{
+            val response = apiClient.getSearchUser(name)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+
+
+
+    }
+
+    fun getAllInvoice() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.getAllInvoice()
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+    }
     fun getProfile() = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try{
@@ -42,9 +64,6 @@ class ZwalletDataSource @Inject constructor(private val apiClient: ZwalletAPI) {
         }catch (e :Exception){
             emit(Resource.error(null,e.localizedMessage))
         }
-
-
-
     }
     fun getInvoice()= liveData(Dispatchers.IO){
        emit(Resource.loading(null))
@@ -55,6 +74,7 @@ class ZwalletDataSource @Inject constructor(private val apiClient: ZwalletAPI) {
             emit(Resource.error(null,e.localizedMessage))
         }
     }
+
 
     fun getBalance()= liveData(Dispatchers.IO){
         emit(Resource.loading(null))
@@ -131,6 +151,35 @@ class ZwalletDataSource @Inject constructor(private val apiClient: ZwalletAPI) {
         }
     }
 
+    fun changePassword(pin :JsonObject) =liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.changePin(pin)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+    }
+
+    fun changePhone(phone :JsonObject) =liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.changePhoneNumber(phone)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+    }
+
+    fun getUserTransaction(id:Int) =liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try{
+            val response = apiClient.getTransactionName(id)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
+        }
+    }
 
 
 }

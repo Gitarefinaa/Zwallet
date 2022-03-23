@@ -24,7 +24,7 @@ class TransferViewModel @Inject constructor(private var dataSource: ZwalletDataS
     var data_notes = MutableLiveData<String>()
     var data_pin = MutableLiveData<String>()
     var data_balance = MutableLiveData<Int>()
-
+    var name = MutableLiveData<String>()
     var data_contact = MutableLiveData<ContactModel>()
     var data_transfer = MutableLiveData<TransferResponseModel>()
 
@@ -51,6 +51,9 @@ class TransferViewModel @Inject constructor(private var dataSource: ZwalletDataS
 
 
     }
+    fun getContactName(name:String): LiveData<Resource<APIResponse<ArrayList<ContactModel>>?>> {
+        return dataSource.getUserbyName(name)
+    }
 
 
 
@@ -64,5 +67,11 @@ class TransferViewModel @Inject constructor(private var dataSource: ZwalletDataS
     fun getContact(): LiveData<Resource<APIResponse<ArrayList<ContactModel>>?>> {
         return dataSource.getContact()
     }
+
+    fun setName(it: String) {
+        return name.postValue(it)
+
+    }
+
 
 }

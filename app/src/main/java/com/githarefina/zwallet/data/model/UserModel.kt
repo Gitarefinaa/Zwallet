@@ -1,10 +1,7 @@
 package com.githarefina.zwallet.data.api.model
-
-
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
-
 @Keep
 data class UserModel(
     @SerializedName("email")

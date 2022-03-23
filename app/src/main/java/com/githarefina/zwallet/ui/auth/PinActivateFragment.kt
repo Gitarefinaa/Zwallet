@@ -115,15 +115,13 @@ class PinActivateFragment : Fragment() {
         viewModel.pinActivation(pin).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when(it.state){
                 State.ERROR->{
-                    loadingDialog.start("PIN Not Succesfully created")
+                    loadingDialog.start(it.message.toString())
+
 
                 }
                 State.SUCCESS->{
-                    loadingDialog.start("PIN Succesfully created")
                     Navigation.findNavController(view).navigate(R.id.action_pinActivateFragment_to_pinSuccessFragment)
-
-
-
+                    loadingDialog.stop()
                 }
                 State.LOADING->{
                     loadingDialog.start("Your process being loaded")

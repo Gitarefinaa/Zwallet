@@ -120,7 +120,6 @@ class ConfirmationPinFragment : Fragment() {
                 }
                 State.SUCCESS->{
                     viewModel.setTransfer(it.data?.details)
-                    loadingDialog.start("Transfer Success")
                     loadingDialog.stop()
 
                     Navigation.findNavController(view).navigate(R.id.action_confirmationPinFragment_to_fragmentTransferSuccess)

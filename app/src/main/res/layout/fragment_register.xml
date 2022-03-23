@@ -116,6 +116,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8">
         <EditText
+
+            android:paddingStart="15dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/user"
             android:layout_width="match_parent"
@@ -130,9 +132,9 @@
             />
 
         <EditText
-
+            android:paddingStart="15dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/email"
@@ -143,23 +145,25 @@
             android:textColor="@color/textLoginEditText"
             android:textSize="14sp"
             />
-
+    <com.google.android.material.textfield.TextInputLayout
+    app:passwordToggleEnabled="true"
+    app:passwordToggleTint="@color/primaryColor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <EditText
-
+            android:paddingTop="10dp"
+            android:background="@color/white"
             android:layout_marginBottom="20dp"
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password"
-            android:drawableEnd="@drawable/pass"
             android:ems="10"
             android:fontFamily="@font/nunito_sans_semibold"
-            android:hint="Enter your password"
-            android:inputType="textPassword"
             android:textColor="@color/textLoginEditText"
             android:textSize="14sp"
             />
-
+</com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>

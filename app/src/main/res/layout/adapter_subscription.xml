@@ -49,15 +49,6 @@
     </LinearLayout>
 
 
-    <TextView
-
-        android:layout_marginEnd="10dp"
-        android:id="@+id/transactionNominal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Rp. 50.000"
-        android:textColor="@color/Success" />
 
 </LinearLayout>
 

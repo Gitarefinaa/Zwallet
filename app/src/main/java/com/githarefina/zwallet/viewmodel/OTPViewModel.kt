@@ -15,9 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class OTPViewModel @Inject constructor(private var dataSource: ZwalletDataSource):ViewModel() {
 
-
-    fun activateOTP(email:String,password:String): LiveData<Resource<APIResponse<String>?>> {
-        return  dataSource.setOTP(email,password)
+    fun activateOTP(email:String,otp:String): LiveData<Resource<APIResponse<String>?>> {
+        return  dataSource.setOTP(email,otp)
 
     }
 

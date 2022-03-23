@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_contact_name"
+
+        android:title="contact name"
+
+        appcompat:actionViewClass="android.widget.SearchView"
+
+        appcompat:showAsAction="always"/>
+</menu>

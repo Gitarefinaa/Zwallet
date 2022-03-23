@@ -35,7 +35,6 @@ class FragmentLogin : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val application : Application = context?.applicationContext as Application
         loginClick()
         binding.forgot.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_resetPasswordEmail)
@@ -70,7 +69,6 @@ class FragmentLogin : Fragment() {
                     }else if(it.data?.data?.hasPin!!.equals(true)){
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_PinFragment)
                     }
-
                     if (it.data?.status == HttpsURLConnection.HTTP_OK) {
                         with(prefs.edit()) {
                             putBoolean(KEY_LOGGED_IN, true)

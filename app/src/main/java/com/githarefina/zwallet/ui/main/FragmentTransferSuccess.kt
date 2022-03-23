@@ -33,7 +33,6 @@ class FragmentTransferSuccess : Fragment() {
         binding.button4.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fragmentTransferSuccess_to_homeFragment)
         }
-
     }
 
 

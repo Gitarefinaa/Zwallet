@@ -39,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textLogin" />
 
     <EditText
+        android:paddingStart="15dp"
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,27 +55,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+<com.google.android.material.textfield.TextInputLayout
+    app:passwordToggleTint="@color/primaryColor"
+    app:passwordToggleEnabled="true"
+    android:textColor="@color/textLoginEditText"
+    android:id="@+id/layoutPass"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.266"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
 
     <EditText
+        android:paddingTop="5dp"
+        android:background="@color/white"
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_marginBottom="284dp"
         android:drawableStart="@drawable/password"
-        android:drawableEnd="@drawable/pass"
         android:ems="10"
         android:fontFamily="@font/nunito_sans_semibold"
-        android:hint="Enter your password"
-        android:inputType="textPassword"
         android:textColor="@color/textLoginEditText"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.266"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        />
+</com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+
         android:id="@+id/forgot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,7 +95,7 @@
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutPass" />
 
     <Button
         android:id="@+id/buttonLogin"

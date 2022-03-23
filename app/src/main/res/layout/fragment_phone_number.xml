@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+
+        android:id="@+id/textCreatePin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:drawableStart="@drawable/icon_back"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text=" Add Phone Number"
+        android:textColor="@color/Header"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/nunito_sans_semibold"
+        android:text="Add at least one phone number for the transfer ID so you can start transfering your money to another user."
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCreatePin" />
+
+    <LinearLayout
+
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/background_login_edit"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+
+        <EditText
+
+            android:drawableStart="@drawable/icon_phone"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/idPhone"
+            android:layout_width="70dp"
+            android:text="+62"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:textColor="@color/textLoginEditText"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/phoneNumber"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:hint="Enter your phone number"
+            android:textColor="@color/textLoginEditText"
+            android:textSize="14sp"
+            />
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/background_header_transaction"
+        android:fontFamily="@font/nunito_sans_semibold"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

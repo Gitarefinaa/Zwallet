@@ -3,6 +3,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,7 +19,9 @@ import com.githarefina.zwallet.viewmodel.TransferViewModel
 class ContactAdapter(
     val context: Context?, private var data: ArrayList<ContactModel>,
     val viewModel: TransferViewModel
-): RecyclerView.Adapter<ContactAdapter.TransactionAdapterHolder>(){
+): RecyclerView.Adapter<ContactAdapter.TransactionAdapterHolder>(),Filterable{
+    private var filteredUserList: ArrayList<ContactModel>? = null
+
 
     private var mOnItemClickListener: OnClickListener? = null
     fun setOnItemClickListener(onItemClickListener: OnClickListener) {
@@ -38,6 +42,7 @@ class ContactAdapter(
         var model = data.get(position)
         binding.transactionName.text = model.name
         binding.transactionType.text = model.phone
+
         binding.root.setOnClickListener{
             mOnItemClickListener?.onClick(view, model);
 
@@ -75,6 +80,39 @@ class ContactAdapter(
     }
     fun addData(data:ArrayList<ContactModel>){
         this.data =data
+    }
+
+    override fun getFilter(): Filter {
+            return object:Filter(){
+                override fun performFiltering(p0: CharSequence?): FilterResults {
+                    val searchString: String = p0.toString()
+
+                    if (searchString.isEmpty()) {
+                        data = filteredUserList!!
+                    } else {
+                        val tempFilteredList: ArrayList<ContactModel> = ArrayList()
+                        for (user in filteredUserList!!) {
+
+                            // search for user title
+                            if (user.name?.toLowerCase()?.contains(searchString)!!) {
+                                tempFilteredList.add(user)
+                            }
+                        }
+                        filteredUserList = tempFilteredList
+                    }
+
+                    val filterResults = FilterResults()
+                    filterResults.values = filteredUserList
+                    return filterResults
+                }
+
+                override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                    filteredUserList =p1?.values as ArrayList<ContactModel>
+                    notifyDataSetChanged()
+                }
+            }
+
+
     }
 
 //    override fun getFilter(): Filter {

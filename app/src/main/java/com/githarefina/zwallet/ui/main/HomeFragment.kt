@@ -1,5 +1,6 @@
 package com.githarefina.zwallet.ui.main
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,9 @@ import com.githarefina.zwallet.R
 import com.githarefina.zwallet.ui.adapter.TransactionAdapter
 import com.githarefina.zwallet.databinding.FragmentHomeBinding
 import com.githarefina.zwallet.data.model.Invoice
+import com.githarefina.zwallet.utils.KEY_USER_EMAIL
+import com.githarefina.zwallet.utils.KEY_USER_TOKEN
+import com.githarefina.zwallet.utils.PREFS_NAME
 import com.githarefina.zwallet.utils.State
 import com.githarefina.zwallet.viewmodel.HomeViewModel
 import com.githarefina.zwallet.viewmodel.TransferViewModel
@@ -36,6 +40,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        prefs= activity?.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)!!
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         loadingDialog = LoadingDialog(requireActivity())
         return binding.root
@@ -55,6 +60,10 @@ class HomeFragment : Fragment() {
         }
         binding.buttonTransfer.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_contactFragment)
+
+        }
+        binding.notif.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_notificationFragment)
 
         }
     }

@@ -49,21 +49,7 @@
         </TextView>
 
     </LinearLayout>
-    <LinearLayout
-        android:padding="20dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-        <TextView
-            android:textColor="@color/Success"
-            android:id="@+id/transactionNominal"
-            android:text="Rp 100.000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-        </TextView>
-    </LinearLayout>
 
 
 </LinearLayout>

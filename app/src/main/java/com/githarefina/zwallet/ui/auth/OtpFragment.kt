@@ -19,9 +19,7 @@ import androidx.navigation.Navigation
 import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentOtpBinding
 import com.githarefina.zwallet.ui.viewModelFactory
-import com.githarefina.zwallet.utils.KEY_SIGNUP_EMAIL
-import com.githarefina.zwallet.utils.PREFS_NAME
-import com.githarefina.zwallet.utils.State
+import com.githarefina.zwallet.utils.*
 import com.githarefina.zwallet.viewmodel.OTPViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,9 +35,7 @@ class OtpFragment : Fragment() {
     private  val viewModel: OTPViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         loadingDialog =LoadingDialog(requireActivity())
-
         binding = FragmentOtpBinding.inflate(inflater,container,false)
-
         pref = activity?.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)!!
         return binding.root
     }
@@ -109,23 +105,23 @@ class OtpFragment : Fragment() {
         viewModel.activateOTP(email!!,getOtp()).observe(viewLifecycleOwner, Observer {
             when(it.state){
                 State.ERROR->{
-                    loadingDialog.start("OTP Not Succesfully created")
                     loadingDialog.stop()
-
                 }
                 State.SUCCESS->{
                     if(it.data?.status!! != HttpsURLConnection.HTTP_OK){
                         loadingDialog.start("OTP Not Succesfully created")
+                        loadingDialog.stop()
 
                     }else{
                         loadingDialog.start("OTP Succesfully created")
+                        loadingDialog.stop()
+
                     }
                     Navigation.findNavController(view).navigate(R.id.action_otpFragment_to_loginFragment)
-
+                    loadingDialog.stop()
                 }
                 State.LOADING->{
                     loadingDialog.start("Your process being loaded")
-                    loadingDialog.stop()
 
                 }
             }
@@ -133,14 +129,11 @@ class OtpFragment : Fragment() {
 
         })
     }
-    fun onClick(){
-        binding.confirm.setOnClickListener {
 
-        }
     }
 
 
-}
+
 
 
 

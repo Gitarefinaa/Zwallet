@@ -13,7 +13,6 @@ import okhttp3.Route
 import javax.net.ssl.HttpsURLConnection
 
 class RefreshTokenInterceptor(
-    val context: Context,
     private val client:ZwalletAPI,
     private val prefs :SharedPreferences
 ) :  Authenticator{

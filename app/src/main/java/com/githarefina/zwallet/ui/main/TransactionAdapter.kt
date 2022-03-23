@@ -36,7 +36,7 @@ class TransactionAdapter(val context: Context?, private var data: List<Invoice>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionAdapterHolder {
-        return TransactionAdapterHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_contact, parent, false))
+        return TransactionAdapterHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_transfer, parent, false))
     }
 
     override fun onBindViewHolder(holder:TransactionAdapterHolder , position: Int) {

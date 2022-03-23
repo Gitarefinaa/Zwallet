@@ -22,9 +22,7 @@ import okhttp3.internal.wait
 class TransferFragment : Fragment(){
     private lateinit var binding:FragmentTransferBinding
     private val model: TransferViewModel by activityViewModels()
-
     private lateinit var  loadingDialog:LoadingDialog
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +34,6 @@ class TransferFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         model.data_contact.observe(viewLifecycleOwner, Observer {
             binding.textName.text = it.name
             binding.textphoneNumber.text = it.phone
@@ -65,13 +62,11 @@ class TransferFragment : Fragment(){
     }
 
     fun getBalance() {
-
         var amount = binding.amountPrice.text.toString()
         if(amount.isNullOrEmpty()){
             model.setAmount(0)
         }else{
             model.setAmount(amount.toInt())
-
         }
            model.notes(binding.notes.text.toString())
 

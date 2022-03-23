@@ -1,4 +1,4 @@
-package com.githarefina.zwallet
+package com.githarefina.zwallet.ui.main
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import com.githarefina.zwallet.R
 import com.githarefina.zwallet.databinding.FragmentDetailTransferBinding
-import com.githarefina.zwallet.viewmodel.HomeViewModel
 import com.githarefina.zwallet.viewmodel.TransferViewModel
 import com.githarefina.zwallet.widget.LoadingDialog
 
